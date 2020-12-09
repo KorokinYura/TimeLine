@@ -1,0 +1,82 @@
+[
+  {
+    "LevelNumber": "1",
+    "LevelDifficulty": "1",
+    "CardsAtBeginning": "5"
+  },
+  {
+    "LevelNumber": "2",
+    "LevelDifficulty": "1",
+    "CardsAtBeginning": "5"
+  },
+  {
+    "LevelNumber": "3",
+    "LevelDifficulty": "1",
+    "CardsAtBeginning": "5"
+  },
+  {
+    "LevelNumber": "4",
+    "LevelDifficulty": "1",
+    "CardsAtBeginning": "5"
+  },
+  {
+    "LevelNumber": "5",
+    "LevelDifficulty": "2",
+    "CardsAtBeginning": "5"
+  },
+  {
+    "LevelNumber": "6",
+    "LevelDifficulty": "2",
+    "CardsAtBeginning": "5"
+  },
+  {
+    "LevelNumber": "7",
+    "LevelDifficulty": "2",
+    "CardsAtBeginning": "5"
+  },
+  {
+    "LevelNumber": "8",
+    "LevelDifficulty": "2",
+    "CardsAtBeginning": "5"
+  },
+  {
+    "LevelNumber": "9",
+    "LevelDifficulty": "3",
+    "CardsAtBeginning": "5"
+  },
+  {
+    "LevelNumber": "10",
+    "LevelDifficulty": "3",
+    "CardsAtBeginning": "5"
+  },
+  {
+    "LevelNumber": "11",
+    "LevelDifficulty": "3",
+    "CardsAtBeginning": "5"
+  },
+  {
+    "LevelNumber": "12",
+    "LevelDifficulty": "3",
+    "CardsAtBeginning": "5"
+  },
+  {
+    "LevelNumber": "13",
+    "LevelDifficulty": "4",
+    "CardsAtBeginning": "5"
+  },
+  {
+    "LevelNumber": "14",
+    "LevelDifficulty": "4",
+    "CardsAtBeginning": "5"
+  },
+  {
+    "LevelNumber": "15",
+    "LevelDifficulty": "4",
+    "CardsAtBeginning": "5"
+  },
+  {
+    "LevelNumber": "16",
+    "LevelDifficulty": "4",
+    "CardsAtBeginning": "5"
+  }
+]
