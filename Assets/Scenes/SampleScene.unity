@@ -334,7 +334,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: {fileID: 205806050}
-  timeLine: {fileID: 1643866909}
+  timeLine: {fileID: 1111968962}
   hand: {fileID: 1832571276}
 --- !u!4 &859288693
 Transform:
@@ -428,6 +428,7 @@ GameObject:
   - component: {fileID: 1111968966}
   - component: {fileID: 1111968965}
   - component: {fileID: 1111968964}
+  - component: {fileID: 1111968967}
   m_Layer: 5
   m_Name: TimeLine
   m_TagString: Untagged
@@ -452,7 +453,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 4000, y: 200}
+  m_SizeDelta: {x: 8000, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1111968964
 MonoBehaviour:
@@ -521,6 +522,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1111968962}
   m_CullTransparentMesh: 0
+--- !u!114 &1111968967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111968962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1e68375fc0228743a97da498bbf6a25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1643866909
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,7 +544,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1643866910}
   m_Layer: 0
-  m_Name: TimeLine
+  m_Name: TimeLineContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -555,7 +568,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -300}
+  m_AnchoredPosition: {x: 0, y: -400}
   m_SizeDelta: {x: 0, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1832571276
@@ -567,6 +580,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1832571277}
+  - component: {fileID: 1832571278}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -588,6 +602,18 @@ Transform:
   m_Father: {fileID: 205806054}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1832571278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1832571276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d82ee79083e96c14aaa49f709b2b9ca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1950422049
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,7 +625,7 @@ GameObject:
   - component: {fileID: 1950422050}
   - component: {fileID: 1950422051}
   m_Layer: 5
-  m_Name: Image
+  m_Name: TimeLineBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

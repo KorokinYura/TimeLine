@@ -14,7 +14,6 @@ public static class LevelController
 
         AvailableCards = JsonConvert.DeserializeObject<List<Card>>((Resources.Load(Constants.CardsJsonFilePath) as TextAsset).text).ToList();
         Levels = JsonConvert.DeserializeObject<List<Level>>((Resources.Load(Constants.LevelsJsonFilePath) as TextAsset).text).ToList();
-        CardsInHand = new List<GameObject>();
     }
 
     public static int CurrentLevelNumber { get; private set; }
@@ -23,7 +22,43 @@ public static class LevelController
 
     public static List<Level> Levels { get; private set; }
 
-    private static List<GameObject> CardsInHand { get; set; }
+    public static List<GameObject> CardsInHand
+    {
+        get
+        {
+            var cards = new List<GameObject>();
+
+            foreach (Transform child in GameController.Instance.Hand.transform)
+            {
+                if (child.GetComponent<CardInstance>() != null)
+                {
+                    cards.Add(child.gameObject);
+                }
+            }
+
+            return cards;
+        }
+    }
+
+    public static List<GameObject> CardsInTimeLine
+    {
+        get
+        {
+            var cards = new List<GameObject>();
+
+            foreach (Transform child in GameController.Instance.TimeLine.transform)
+            {
+                if (child.GetComponent<CardInstance>() != null)
+                {
+                    cards.Add(child.gameObject);
+                }
+            }
+
+            return cards;
+        }
+    }
+
+    public static GameObject SelectedCard { get; set; }
 
     public static void LoadCurrentLevel()
     {
@@ -47,13 +82,14 @@ public static class LevelController
     private static void LoadHand(int cards)
     {
         var cardPrefab = Resources.Load(Constants.CardPrefab) as GameObject;
+        var handInstance = GameController.Instance.Hand.GetComponent<HandInstance>();
 
         for (int i = 1; i <= cards; i++)
         {
             var card = InstansiateCard(cardPrefab);
-            CardsInHand.Add(card);
-            card.transform.localPosition = new Vector2((Screen.width / cards * i) - (Screen.width / (5f/3f)), -(Screen.height / 2.5f));
         }
+
+        handInstance.UpdateCardsLocation();
     }
 
     private static GameObject InstansiateCard(GameObject cardPrefab)

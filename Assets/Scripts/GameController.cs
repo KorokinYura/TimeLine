@@ -19,7 +19,6 @@ public class GameController : MonoBehaviour
         LoadGame();
     }
 
-
     public static GameController Instance { get; private set; }
 
     public GameObject Level => level;
