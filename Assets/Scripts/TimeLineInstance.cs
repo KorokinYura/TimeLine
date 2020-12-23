@@ -6,11 +6,13 @@ using UnityEngine.EventSystems;
 
 public class TimeLineInstance : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler
 {
+    private bool pointerIsInside;
+
     private List<Transform> ActualCardsPositions { get; set; }
 
     private void Update()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (pointerIsInside && LevelController.SelectedCard != null)
         {
             PointerEventData pointerData = new PointerEventData(EventSystem.current)
             {
@@ -22,7 +24,7 @@ public class TimeLineInstance : MonoBehaviour, IPointerEnterHandler, IPointerExi
             List<RaycastResult> results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(pointerData, results);
 
-            if (results.FirstOrDefault(r => r.gameObject.name == "TimeLine").gameObject != null && LevelController.SelectedCard != null)
+            if (results.FirstOrDefault(r => r.gameObject.name == "TimeLine").gameObject != null)
             {
                 OnPointerOver();
             }
@@ -31,12 +33,14 @@ public class TimeLineInstance : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        pointerIsInside = true;
         var cards = LevelController.CardsInTimeLine;
         ActualCardsPositions = cards.Select(c => c.transform).ToList();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        pointerIsInside = false;
         if (ActualCardsPositions != null && LevelController.SelectedCard != null)
         {
             ActualCardsPositions.Remove(LevelController.SelectedCard.transform);

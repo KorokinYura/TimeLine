@@ -64,6 +64,13 @@ public static class LevelController
     public static void LoadCurrentLevel()
     {
         var currentLevel = Levels.First(l => l.LevelNumber == CurrentLevelNumber);
+
+        if (AvailableCards.Count < currentLevel.CardsAtBeginning)
+        {
+            GameController.Instance.ErrorText.GetComponent<Text>().text = "There is not enough cards to start next level";
+            return;
+        }
+
         GameController.Instance.LevelNumberText.GetComponent<Text>().text = CurrentLevelNumber.ToString();
 
         LoadHand(currentLevel.CardsAtBeginning);
@@ -126,6 +133,11 @@ public static class LevelController
         if (CardsInHand.Count != 0)
         {
             GameController.Instance.ErrorText.GetComponent<Text>().text = "Hand must be empty before end of the level.";
+            return;
+        }
+
+        if (CardsInTimeLine.Count == 0)
+        {
             return;
         }
 
