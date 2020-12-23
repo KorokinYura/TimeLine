@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -63,9 +64,11 @@ public static class LevelController
     public static void LoadCurrentLevel()
     {
         var currentLevel = Levels.First(l => l.LevelNumber == CurrentLevelNumber);
+        GameController.Instance.LevelNumberText.GetComponent<Text>().text = CurrentLevelNumber.ToString();
 
         LoadHand(currentLevel.CardsAtBeginning);
 
+        // Additional rules for different level difficulties
         switch (currentLevel.LevelDifficulty)
         {
             case LevelDifficulty.Easy:
@@ -79,6 +82,14 @@ public static class LevelController
         }
     }
 
+    private static void ClearLevel()
+    {
+        var cards = CardsInTimeLine;
+        cards.AddRange(CardsInHand);
+
+        cards.ForEach(c => UnityEngine.Object.Destroy(c));
+    }
+
     private static void LoadHand(int cards)
     {
         var cardPrefab = Resources.Load(Constants.CardPrefab) as GameObject;
@@ -86,7 +97,7 @@ public static class LevelController
 
         for (int i = 1; i <= cards; i++)
         {
-            var card = InstansiateCard(cardPrefab);
+            InstansiateCard(cardPrefab);
         }
 
         handInstance.UpdateCardsLocation();
@@ -94,11 +105,11 @@ public static class LevelController
 
     private static GameObject InstansiateCard(GameObject cardPrefab)
     {
-        var card = Object.Instantiate(cardPrefab);
+        var card = UnityEngine.Object.Instantiate(cardPrefab);
 
         var cardInstance = card.GetComponent<CardInstance>();
 
-        var cardIndex = Random.Range(0, AvailableCards.Count);
+        var cardIndex = UnityEngine.Random.Range(0, AvailableCards.Count);
         cardInstance.Card = AvailableCards[cardIndex];
         AvailableCards.RemoveAt(cardIndex);
 
@@ -108,5 +119,45 @@ public static class LevelController
         card.transform.localScale = cardPrefab.transform.localScale;
 
         return card;
+    }
+
+    public static void CheckLevelFinished()
+    {
+        if (CardsInHand.Count != 0)
+        {
+            GameController.Instance.ErrorText.GetComponent<Text>().text = "Hand must be empty before end of the level.";
+            return;
+        }
+
+        try
+        {
+            var cards = CardsInTimeLine;
+            var curDate = cards[0].GetComponent<CardInstance>().Card.Date;
+
+            foreach (var card in cards)
+            {
+                var cardInstance = card.GetComponent<CardInstance>();
+                if (curDate <= cardInstance.Card.Date)
+                {
+                    curDate = cardInstance.Card.Date;
+                }
+                else
+                {
+                    GameController.Instance.ErrorText.GetComponent<Text>().text = "Incorrect cards order.";
+                    return;
+                }
+            }
+
+            CurrentLevelNumber++;
+
+            GameController.Instance.SaveGame();
+            ClearLevel();
+            LoadCurrentLevel();
+        }
+        catch (Exception ex)
+        {
+            GameController.Instance.GetComponent<Text>().text = $"Unhandled error occured - Exception type: {ex.GetType()}";
+            Debug.Log(ex);
+        }
     }
 }

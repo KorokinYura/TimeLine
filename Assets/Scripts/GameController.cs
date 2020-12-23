@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
@@ -11,12 +12,17 @@ public class GameController : MonoBehaviour
     private GameObject timeLine;
     [SerializeField]
     private GameObject hand;
+    [SerializeField]
+    private GameObject levelNumberText;
+    [SerializeField]
+    private GameObject errorText;
 
     void Start()
     {
         Instance = this;
         CheckJsonFiles();
         LoadGame();
+        ErrorText.GetComponent<Text>().text = "You should place cards in chronological order.";
     }
 
     public static GameController Instance { get; private set; }
@@ -27,18 +33,28 @@ public class GameController : MonoBehaviour
 
     public GameObject Hand => hand;
 
+    public GameObject LevelNumberText => levelNumberText;
 
-    private void LoadGame()
+    public GameObject ErrorText => errorText;
+
+
+    public void LoadGame()
     {
         LevelController.LoadCurrentLevel();
     }
 
-    private void SaveGame()
+    public void SaveGame()
     {
         PlayerPrefs.SetInt(Constants.LevelNumberPrefs, LevelController.CurrentLevelNumber);
     }
 
+    public void CheckButtonClicked()
+    {
+        LevelController.CheckLevelFinished();
+    }
+
     private void CheckJsonFiles()
     {
+        // TBD
     }
 }

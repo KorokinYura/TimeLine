@@ -18,6 +18,7 @@ public class CardInstance : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        GameController.Instance.ErrorText.GetComponent<Text>().text = "Drag cards on timeline to play game.";
         gameObject.GetComponent<Image>().raycastTarget = false;
         prevPosition = transform.position;
 

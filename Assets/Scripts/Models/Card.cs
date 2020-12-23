@@ -4,7 +4,7 @@ public class Card
 {
     public string Name;
 
-    public DateTime Time;
+    public DateTime Date;
 
     public string SpriteName;
 }
